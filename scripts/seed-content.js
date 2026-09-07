@@ -1,20 +1,4 @@
-/**
- * scripts/seed-content.js
- * -----------------------------------------------------------------------
- * Mengisi tabel site_content dengan konten AWAL (data yang dulu ada di
- * data/content.js), supaya begitu fitur "Kelola Konten" mulai dipakai,
- * halaman publik tidak tiba-tiba kosong.
- *
- * HANYA PERLU DIJALANKAN SEKALI, setelah npm run migrate dan sebelum
- * pertama kali membuka halaman admin "Kelola Konten". Aman dijalankan
- * ulang — akan MENIMPA isi section yang sudah ada di database dengan
- * data awal ini, jadi jangan dijalankan lagi setelah konten pernah
- * diedit lewat halaman admin (kecuali memang ingin mengembalikan ke
- * data contoh awal).
- *
- *   npm run seed-content
- * -----------------------------------------------------------------------
- */
+
 require("dotenv").config();
 
 const db = require("../api/_lib/config/db");

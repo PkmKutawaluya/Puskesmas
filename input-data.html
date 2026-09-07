@@ -12,8 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 
-  <!-- Auth guard: cek sesi admin SEBELUM konten halaman dirender,
-       supaya halaman tidak "berkedip" sebelum redirect ke login. -->
+
   <script src="js/services/auth.js"></script>
   <script>window.AdminAuth.protect();</script>
 </head>
@@ -54,7 +53,7 @@
             <div class="upload-dropzone" id="upload-dropzone">
               <div class="upload-icon"><i class="fa-solid fa-upload"></i></div>
               <div>Upload File Excel</div>
-              <div class="small text-muted mt-1">Format: .xlsx  Maks. 10MB.</div>
+              <div class="small text-muted mt-1">Format: .xlsx Maks. 10MB.</div>
               <div class="upload-filename" id="upload-filename"></div>
             </div>
             <input type="file" id="upload-file" name="file" accept=".xlsx,.xls" hidden>

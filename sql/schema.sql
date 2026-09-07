@@ -1,22 +1,4 @@
--- =============================================================================
--- SKEMA DATABASE — UPTD PUSKESMAS KUTAWALUYA (Turso / libSQL, dialek SQLite)
---
--- Cara menjalankan (pilih salah satu):
---   1. Turso CLI   : turso db shell <nama-db> < sql/schema.sql
---   2. Turso CLI   : turso db shell <nama-db>
---                    lalu paste isi file ini satu per satu.
---   3. Lokal (dev) : gunakan file SQLite lokal, jalankan lewat sqlite3 atau
---                    lewat client Node (lihat README.md).
--- =============================================================================
 
--- -----------------------------------------------------------------------
--- 1. survey_responses
---    Jawaban disimpan sebagai TEXT berisi JSON (`answers`) — BUKAN kolom
---    tetap question_1..question_n — supaya jumlah pertanyaan pada form
---    survei dapat berubah kapan saja tanpa perlu migrasi skema database.
---    Contoh isi kolom answers: {"q1": 5, "q2": 4, "q3": 3, ...}
---    id dibuat di sisi aplikasi (UUID v4, lihat services/surveyService.js).
--- -----------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS survey_responses (
   id           TEXT PRIMARY KEY,
   created_at   TEXT NOT NULL DEFAULT (datetime('now')),

@@ -1,13 +1,4 @@
-/**
- * pages/pengaduan.js
- * -----------------------------------------------------------------------
- * Form Layanan Pengaduan Masyarakat:
- *  - Validasi form di sisi frontend
- *  - Kirim data via Fetch API (POST /api/complaints) ke backend
- *    (backend yang meneruskan ke email tujuan, TIDAK disimpan ke Supabase)
- *  - Notifikasi sukses/gagal, reset form setelah berhasil
- * -----------------------------------------------------------------------
- */
+
 (function (window, document) {
   "use strict";
 

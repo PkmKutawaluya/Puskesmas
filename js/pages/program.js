@@ -1,12 +1,4 @@
-/**
- * pages/program.js
- * -----------------------------------------------------------------------
- * Menampilkan daftar program kesehatan Puskesmas dari database (tabel
- * site_content, bagian `programs`), dengan pencarian dan filter kategori
- * di sisi frontend. Untuk mengubah konten: login admin -> halaman
- * "Kelola Konten" -> tab Program -> edit -> Simpan.
- * -----------------------------------------------------------------------
- */
+
 (function (window, document) {
   "use strict";
 

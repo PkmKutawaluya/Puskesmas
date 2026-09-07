@@ -1,26 +1,11 @@
-/**
- * api.js
- * -----------------------------------------------------------------------
- * Lapisan komunikasi terpusat ke backend (Fetch API).
- * Semua pemanggilan endpoint HARUS lewat modul ini agar:
- *  - base URL konsisten (dari config.js)
- *  - error handling (network error, timeout, HTTP error) seragam
- *  - mudah diganti/di-mock saat backend belum tersedia
- *
- * Tidak ada logika bisnis (perhitungan statistik, dsb) di sini.
- * Modul ini murni transport layer.
- * -----------------------------------------------------------------------
- */
+
 (function (window) {
   "use strict";
 
   const BASE_URL = window.APP_CONFIG.API_BASE_URL;
   const TIMEOUT = window.APP_CONFIG.REQUEST_TIMEOUT;
 
-  /**
-   * Kelas error khusus supaya pemanggil bisa membedakan
-   * antara error jaringan, timeout, dan error dari server.
-   */
+
   class ApiError extends Error {
     constructor(message, type, status) {
       super(message);
@@ -31,8 +16,8 @@
   }
 
   /**
-   * Wrapper fetch dengan timeout + parsing JSON + error handling seragam.
-   * @param {string} path - path relatif, contoh: '/survey/satisfaction'
+
+  * @param {string} path - path relatif, contoh: '/survey/satisfaction'
    * @param {RequestInit} options - opsi fetch tambahan
    * @returns {Promise<any>} data JSON hasil parse
    */

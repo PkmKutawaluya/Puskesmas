@@ -1,16 +1,4 @@
-/**
- * components.js
- * -----------------------------------------------------------------------
- * Komponen navbar & footer yang reusable di seluruh halaman.
- * Setiap halaman cukup menaruh:
- *   <div id="app-navbar" data-page="beranda"></div>
- *   <div id="app-footer"></div>
- * dan memuat script ini sebelum main.js.
- *
- * Dipusatkan di satu file supaya perubahan navbar/footer cukup dilakukan
- * di satu tempat saja (bukan disalin manual ke 7 halaman).
- * -----------------------------------------------------------------------
- */
+
 (function (window, document) {
   "use strict";
 

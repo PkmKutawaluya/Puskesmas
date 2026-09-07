@@ -1,11 +1,4 @@
-/**
- * pages/profil.js
- * -----------------------------------------------------------------------
- * Menampilkan data Profil Puskesmas dari database (tabel site_content,
- * bagian `profile`). Untuk mengubah konten: login admin -> halaman
- * "Kelola Konten" -> tab Profil -> edit -> Simpan.
- * -----------------------------------------------------------------------
- */
+
 (function (window, document) {
   "use strict";
 

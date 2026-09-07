@@ -1,13 +1,4 @@
-/**
- * pages/survei.js
- * -----------------------------------------------------------------------
- * Form Survei Kepuasan Masyarakat:
- *  - Generate 9 pertanyaan penilaian dengan skala 1-5
- *  - Validasi form di sisi frontend
- *  - Kirim data via Fetch API (POST /api/survey) ke backend -> Supabase
- *  - Notifikasi sukses/gagal, reset form setelah berhasil
- * -----------------------------------------------------------------------
- */
+
 (function (window, document) {
   "use strict";
 
@@ -155,7 +146,7 @@
     renderQuestions();
     document.getElementById("survey-form").addEventListener("submit", handleSubmit);
 
-    // Set batas tanggal kunjungan agar tidak melebihi hari ini.
+
     const tanggalInput = document.getElementById("survey-tanggal");
     tanggalInput.max = new Date().toISOString().split("T")[0];
   });

@@ -1,13 +1,4 @@
-/**
- * pages/beranda.js
- * -----------------------------------------------------------------------
- * Logika khusus halaman Beranda:
- *  - Informasi & Berita         -> database, dikelola via halaman admin "Kelola Konten"
- *  - Agenda / Kegiatan Mendatang -> database, dikelola via halaman admin "Kelola Konten"
- *  - Grafik Data Kesehatan       -> backend (dinamis dari hasil upload Excel)
- *  - Persentase Kepuasan         -> backend (dihitung dari data survei)
- * -----------------------------------------------------------------------
- */
+
 (function (window, document) {
   "use strict";
 
@@ -135,10 +126,8 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    // Informasi & Berita, Agenda -> tunggu window.SITE_CONTENT terisi dari server.
     window.SiteContentReady.then(loadNews);
     window.SiteContentReady.then(loadAgenda);
-    // Grafik & kepuasan -> panggilan API sendiri, tidak perlu menunggu konten situs.
     loadVisitsChart();
     loadDiseasesChart();
     loadSatisfaction();

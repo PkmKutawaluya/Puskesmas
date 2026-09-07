@@ -1,11 +1,4 @@
-/**
- * charts.js
- * -----------------------------------------------------------------------
- * Logika pembuatan grafik (Chart.js) untuk data kesehatan.
- * Semua data grafik WAJIB berasal dari backend (lihat services/api.js),
- * modul ini tidak boleh menyimpan data statistik secara hardcode.
- * -----------------------------------------------------------------------
- */
+
 (function (window) {
   "use strict";
 
@@ -57,8 +50,8 @@
   }
 
   /**
-   * Render grafik penyakit terbanyak (Bar Chart horizontal).
-   * @param {HTMLCanvasElement} canvas
+
+  * @param {HTMLCanvasElement} canvas
    * @param {{labels: string[], values: number[]}} data
    */
   function renderDiseasesChart(canvas, data) {

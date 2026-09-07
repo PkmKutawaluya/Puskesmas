@@ -1,14 +1,4 @@
-/**
- * pages/input-data.js
- * -----------------------------------------------------------------------
- * Halaman Input Data Kesehatan:
- *  - Pilih jenis data + upload file Excel (.xlsx/.xls) via drag & drop atau klik
- *  - Validasi ekstensi & ukuran file di frontend
- *  - Kirim file ke backend menggunakan multipart/form-data (POST /api/health/upload)
- *  - Backend yang memproses Excel & menyimpan hasil ke Supabase (bukan frontend)
- *  - Tampilkan progress upload, notifikasi sukses/error
- * -----------------------------------------------------------------------
- */
+
 (function (window, document) {
   "use strict";
 
@@ -243,9 +233,7 @@
     });
   }
 
-  /* ---------------------------------------------------------------------
-   * Kelola file yang sudah diunggah (lihat & hapus per sumber file)
-   * ------------------------------------------------------------------- */
+
 
   function formatTanggal(isoString) {
     if (!isoString) return "-";

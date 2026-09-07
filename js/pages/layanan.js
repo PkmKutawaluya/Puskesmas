@@ -1,12 +1,4 @@
-/**
- * pages/layanan.js
- * -----------------------------------------------------------------------
- * Menampilkan daftar layanan, cluster ILP, jadwal dokter (dengan filter),
- * alur pelayanan, dan persyaratan dokumen — seluruhnya dari database
- * (tabel site_content, bagian `layanan`). Untuk mengubah konten: login
- * admin -> halaman "Kelola Konten" -> tab Layanan -> edit -> Simpan.
- * -----------------------------------------------------------------------
- */
+
 (function (window, document) {
   "use strict";
 

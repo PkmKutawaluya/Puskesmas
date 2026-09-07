@@ -1,20 +1,4 @@
-/**
- * pages/kelola-konten.js
- * -----------------------------------------------------------------------
- * Halaman admin "Kelola Konten" — CRUD untuk seluruh konten yang dulunya
- * statis di data/content.js: Informasi & Berita, Agenda, Profil, Layanan,
- * dan Program.
- *
- * Dibangun dengan "form builder" generik (createTextField,
- * createStringListField, createObjectListField) supaya tidak perlu
- * menulis form terpisah untuk tiap 12 jenis konten satu-satu — cukup
- * definisikan field apa saja yang dibutuhkan tiap bagian.
- *
- * Data disimpan sebagai JSON di backend (tabel site_content, lihat
- * api/_lib/services/contentService.js), satu section per tab. Simpan
- * hanya mengirim section yang sedang aktif, bukan semuanya sekaligus.
- * -----------------------------------------------------------------------
- */
+
 (function (window, document) {
   "use strict";
 
@@ -27,7 +11,7 @@
    * Form builder generik
    * ------------------------------------------------------------------- */
 
-  /** Input teks/textarea/tanggal biasa, terikat langsung ke obj[key]. */
+  
   function createTextField(container, obj, key, label, type) {
     const wrap = document.createElement("div");
     wrap.className = "mb-3";
@@ -55,7 +39,7 @@
     container.appendChild(wrap);
   }
 
-  /** Daftar string sederhana (contoh: misi[], persyaratan_umum[]) dengan tambah/hapus baris. */
+
   function createStringListField(container, obj, key, label) {
     if (!Array.isArray(obj[key])) obj[key] = [];
 
@@ -114,7 +98,7 @@
     container.appendChild(wrap);
   }
 
-  /** Upload file PDF (contoh: file akreditasi) — mengunggah lewat API, obj[key] menyimpan URL hasilnya. */
+
   function createFileField(container, obj, key, label) {
     const wrap = document.createElement("div");
     wrap.className = "mb-3";
@@ -214,11 +198,7 @@
     container.appendChild(wrap);
   }
 
-  /**
-   * Daftar objek berulang (contoh: news[], services[]) — setiap item
-   * dirender sebagai "kartu" dengan field sesuai fieldDefs, plus tombol
-   * hapus per kartu dan tombol tambah kartu baru di bawah.
-   */
+
   function createObjectListField(container, arrayRef, fieldDefs, itemLabelFn, addLabel) {
     const listEl = document.createElement("div");
     container.appendChild(listEl);
@@ -303,9 +283,7 @@
     return wrap;
   }
 
-  /* ---------------------------------------------------------------------
-   * Skema tiap bagian konten (daftar sederhana)
-   * ------------------------------------------------------------------- */
+
 
   const LIST_SCHEMAS = {
     news: {
@@ -344,9 +322,7 @@
     },
   };
 
-  /* ---------------------------------------------------------------------
-   * Render panel per bagian
-   * ------------------------------------------------------------------- */
+
 
   function renderProfilePanel(container, data) {
     container.innerHTML = "";

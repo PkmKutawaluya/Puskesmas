@@ -1,18 +1,14 @@
-/* =========================================================================
-   UPTD PUSKESMAS KUTAWALUYA — MAIN STYLESHEET
-   Dibangun mengikuti referensi desain UI/UX yang diberikan.
-   ========================================================================= */
+
 
 :root {
-  /* --- Palet warna (diambil dari referensi desain) --- */
-  --color-primary-900: #0b6642;   /* hijau tua - heading, teks aksen */
+  --color-primary-900: #0b6642;   
   --color-primary-700: #0f7a4f;
-  --color-primary-600: #1a915e;   /* awal gradient tombol */
+  --color-primary-600: #1a915e;   
   --color-primary-500: #16a34a;
-  --color-primary-400: #34d68d;   /* akhir gradient tombol */
-  --color-primary-100: #d9ffe0;   /* background navbar / pill */
+  --color-primary-400: #34d68d;   
+  --color-primary-100: #d9ffe0;   
   --color-primary-50: #eafff0;
-  --color-surface-mint: #eafbef;  /* background section terang */
+  --color-surface-mint: #eafbef;  
   --color-surface-mint-strong: #d7f7e0;
 
   --color-text-heading: #0b6642;
@@ -110,7 +106,7 @@ img {
   max-width: 640px;
 }
 
-/* Fokus keyboard tetap terlihat (aksesibilitas) */
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,

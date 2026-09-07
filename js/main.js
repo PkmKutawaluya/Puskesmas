@@ -1,16 +1,8 @@
-/**
- * main.js
- * -----------------------------------------------------------------------
- * Logika umum yang dipakai di semua halaman:
- *  - menandai menu navbar yang aktif sesuai halaman
- *  - mengisi tahun berjalan di footer
- *  - helper kecil yang dipakai lintas halaman (escapeHtml, formatDate, dsb)
- * -----------------------------------------------------------------------
- */
+
 (function (window, document) {
   "use strict";
 
-  /** Escape string sebelum disisipkan ke innerHTML, mencegah XSS dari data API. */
+
   function escapeHtml(str) {
     if (str === null || str === undefined) return "";
     return String(str)
@@ -21,7 +13,7 @@
       .replace(/'/g, "&#039;");
   }
 
-  /** Format tanggal ISO menjadi format Indonesia singkat, contoh: 12 Agu 2026 */
+
   function formatDate(isoString) {
     if (!isoString) return "-";
     try {
@@ -37,7 +29,7 @@
     }
   }
 
-  /** Tandai link navbar yang cocok dengan halaman saat ini. */
+  
   function markActiveNav() {
     const current = (document.body.dataset.page || "").toLowerCase();
     document.querySelectorAll(".nav-pill[data-page]").forEach((link) => {

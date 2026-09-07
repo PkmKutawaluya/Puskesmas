@@ -1,16 +1,4 @@
-/**
- * pages/login.js
- * -----------------------------------------------------------------------
- * Menangani form login admin:
- *  - validasi input dasar
- *  - panggil POST /api/auth/login lewat ApiService.adminLogin
- *  - simpan token di sessionStorage lewat AdminAuth
- *  - redirect ke halaman tujuan (default: input-data.html)
- *
- * Jika admin sudah login (token masih ada di sessionStorage), halaman
- * ini langsung redirect ke tujuan tanpa perlu login ulang.
- * -----------------------------------------------------------------------
- */
+
 (function (window, document) {
   "use strict";
 
@@ -99,7 +87,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    // Jika sudah login, langsung lempar ke halaman tujuan.
+
     if (window.AdminAuth.isLoggedIn()) {
       window.location.href = getNextPage();
       return;

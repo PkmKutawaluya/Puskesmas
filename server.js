@@ -1,15 +1,4 @@
-/**
- * server.js
- * -----------------------------------------------------------------------
- * Entry point untuk development LOKAL saja (`npm run dev`).
- * Vercel TIDAK menggunakan file ini — di Vercel, request ditangani oleh
- * api/index.js sebagai serverless function (lihat vercel.json).
- *
- * File ini hanya membuka Express app (api/_lib/app.js) di sebuah PORT
- * lokal supaya bisa dites lewat http://localhost:5000 sebelum di-push
- * dan di-deploy.
- * -----------------------------------------------------------------------
- */
+
 require("dotenv").config();
 
 const app = require("./api/_lib/app");
