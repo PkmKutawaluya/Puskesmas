@@ -1,18 +1,9 @@
-/**
- * controllers/contentController.js
- * -----------------------------------------------------------------------
- * GET    /api/content            -> seluruh konten situs (publik)
- * GET    /api/content/:section   -> satu bagian konten (admin, untuk form edit)
- * PUT    /api/content/:section   -> simpan satu bagian konten (admin)
- * -----------------------------------------------------------------------
- */
+
 const contentService = require("../services/contentService");
 const asyncHandler = require("../utils/asyncHandler");
 const { sendSuccess, ApiError } = require("../utils/apiResponse");
 
-// Section yang isinya berupa DAFTAR (array) vs OBJEK tunggal — dipakai
-// untuk validasi bentuk data sebelum disimpan, supaya halaman publik
-// tidak crash gara-gara admin tidak sengaja mengirim bentuk yang salah.
+
 const ARRAY_SECTIONS = ["news", "agenda", "programs"];
 const OBJECT_SECTIONS = ["profile", "layanan"];
 

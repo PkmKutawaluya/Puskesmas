@@ -1,10 +1,4 @@
-/**
- * controllers/statusController.js
- * -----------------------------------------------------------------------
- * Endpoint sederhana untuk memastikan backend berjalan (health check),
- * berguna untuk monitoring/uptime check.
- * -----------------------------------------------------------------------
- */
+
 const { sendSuccess } = require("../utils/apiResponse");
 
 function getStatus(req, res) {

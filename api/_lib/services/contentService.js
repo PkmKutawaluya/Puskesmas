@@ -1,17 +1,4 @@
-/**
- * services/contentService.js
- * -----------------------------------------------------------------------
- * Mengelola konten yang dulunya statis di data/content.js — sekarang
- * disimpan di tabel site_content (satu baris JSON per "bagian"), dan
- * diedit lewat halaman admin "Kelola Konten" (kelola-konten.html).
- *
- * Bagian yang tersedia (section_key): news, agenda, profile, layanan, programs.
- * Bentuk JSON tiap bagian PERSIS SAMA seperti field yang dulu ada di
- * window.SITE_CONTENT (data/content.js), supaya halaman publik (Beranda,
- * Profil, Layanan, Program) tidak perlu ditulis ulang logikanya — cuma
- * sumber datanya yang pindah dari file statis ke sini.
- * -----------------------------------------------------------------------
- */
+
 const db = require("../config/db");
 const { ApiError } = require("../utils/apiResponse");
 const crypto = require("node:crypto");
@@ -20,9 +7,7 @@ const TABLE = "site_content";
 
 const VALID_SECTIONS = ["news", "agenda", "profile", "layanan", "programs"];
 
-// Struktur kosong default per section — dipakai kalau baris section belum
-// ada di database sama sekali (misalnya sebelum seed pernah dijalankan),
-// supaya halaman publik tetap menampilkan "Belum ada data ..." alih-alih error.
+
 const EMPTY_DEFAULTS = {
   news: [],
   agenda: [],
@@ -45,7 +30,7 @@ function assertValidSection(section) {
   }
 }
 
-/** GET /api/content -> seluruh bagian sekaligus (dipakai halaman publik). */
+
 async function getAllContent() {
   let result;
   try {
@@ -59,14 +44,13 @@ async function getAllContent() {
     try {
       combined[row.section_key] = JSON.parse(row.content_json);
     } catch (err) {
-      // Baris rusak/JSON tidak valid: biarkan default kosong untuk section itu
-      // saja, jangan sampai satu baris rusak menjatuhkan seluruh halaman.
+
     }
   });
   return combined;
 }
 
-/** GET /api/content/:section -> satu bagian saja (dipakai form admin). */
+
 async function getSection(section) {
   assertValidSection(section);
 
@@ -90,11 +74,7 @@ async function getSection(section) {
   }
 }
 
-/**
- * PUT /api/content/:section -> ganti seluruh isi satu bagian (admin only).
- * `content` sudah harus berupa objek/array JS valid (bukan string JSON)
- * — divalidasi bentuknya (array vs objek) sesuai section-nya di controller.
- */
+
 async function setSection(section, content) {
   assertValidSection(section);
 
@@ -116,16 +96,7 @@ async function setSection(section, content) {
   return { section, saved: true };
 }
 
-/* ------------------------------------------------------------------- */
-/* File yang diunggah lewat halaman admin (contoh: PDF akreditasi)      */
-/* ------------------------------------------------------------------- */
 
-/**
- * Simpan file (PDF) sebagai BLOB di database. Dipakai supaya admin bisa
- * mengunggah dokumen (misalnya sertifikat akreditasi) langsung dari
- * halaman "Kelola Konten", tanpa perlu menaruh file ke folder assets/
- * lewat git push.
- */
 async function saveContentFile(buffer, originalName, mimeType) {
   const id = crypto.randomUUID();
   try {
@@ -139,7 +110,7 @@ async function saveContentFile(buffer, originalName, mimeType) {
   return { id };
 }
 
-/** Ambil kembali file yang tersimpan, untuk disajikan lewat GET /api/content/files/:id. */
+
 async function getContentFile(id) {
   let result;
   try {

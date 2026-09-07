@@ -1,17 +1,4 @@
-/**
- * services/healthService.js
- * -----------------------------------------------------------------------
- * Logika bisnis untuk data kesehatan:
- *   - menyimpan hasil olahan Excel ke Turso (health_visits /
- *     health_diseases / health_data, tergantung jenis data)
- *   - menyediakan data agregasi untuk grafik (GET /api/health/visits,
- *     /api/health/diseases) dan ringkasan (GET /api/health/summary)
- *
- * Agregasi dilakukan di sisi Node (bukan SQL view) demi kesederhanaan —
- * cukup untuk skala data Puskesmas. Jika volume data sudah besar,
- * pertimbangkan memindahkan agregasi ke query SQL agregat langsung.
- * -----------------------------------------------------------------------
- */
+
 const db = require("../config/db");
 const { ApiError } = require("../utils/apiResponse");
 
@@ -35,9 +22,7 @@ function formatMonthLabel(monthKey) {
   return `${BULAN_INDONESIA[Number(m) - 1]} ${y}`;
 }
 
-/* ------------------------------------------------------------------- */
-/* Penyimpanan hasil olahan Excel                                       */
-/* ------------------------------------------------------------------- */
+
 
 async function saveKunjunganPasien(rows, sourceFile) {
   const statements = rows.map((r) => ({
@@ -81,11 +66,10 @@ async function saveGenericHealthData(rows, jenisData, sourceFile) {
   return { inserted: rows.length };
 }
 
-/* ------------------------------------------------------------------- */
-/* Data untuk grafik (Beranda)                                          */
-/* ------------------------------------------------------------------- */
 
-/** GET /api/health/visits -> { labels: [Nama Bulan yyyy...], values: [...] } */
+
+
+
 async function getVisitsChartData() {
   let result;
   try {
@@ -118,7 +102,7 @@ async function getVisitsChartData() {
   };
 }
 
-/** GET /api/health/diseases -> { labels: [...], values: [...] } (top 10) */
+
 async function getDiseasesChartData() {
   let result;
   try {
@@ -151,7 +135,7 @@ async function getDiseasesChartData() {
   };
 }
 
-/** GET /api/health/summary -> ringkasan umum data kesehatan. */
+
 async function getHealthSummary() {
   let visitsResult;
   let diseasesResult;
@@ -194,22 +178,14 @@ async function getHealthSummary() {
   };
 }
 
-/* ------------------------------------------------------------------- */
-/* Kelola file yang pernah diunggah (lihat & hapus per sumber file)     */
-/* ------------------------------------------------------------------- */
+
 
 const KATEGORI_LABEL = {
   kunjungan_pasien: "Data Kunjungan Pasien",
   penyakit_terbanyak: "Data Penyakit Terbanyak",
 };
 
-/**
- * GET /api/health/sources
- * Mengelompokkan data yang tersimpan berdasarkan nama file Excel asal
- * upload-nya, supaya admin bisa melihat "batch" mana saja yang pernah
- * diunggah dan memilih salah satu untuk dihapus sebelum mengunggah data
- * pengganti.
- */
+
 async function listUploadedSources() {
   let visitsResult;
   let diseasesResult;
@@ -261,16 +237,14 @@ async function listUploadedSources() {
     })),
   ];
 
-  // Terbaru diunggah tampil paling atas.
-  items.sort((a, b) => (a.diunggah_pada < b.diunggah_pada ? 1 : -1));
+   items.sort((a, b) => (a.diunggah_pada < b.diunggah_pada ? 1 : -1));
 
   return items;
 }
 
 /**
- * DELETE /api/health/sources
- * Menghapus seluruh baris yang berasal dari satu file/kategori tertentu.
- * @param {{kategori: string, sourceFile: string, jenisData?: string}} params
+
+* @param {{kategori: string, sourceFile: string, jenisData?: string}} params
  */
 async function deleteBySource({ kategori, sourceFile, jenisData }) {
   if (!sourceFile) {

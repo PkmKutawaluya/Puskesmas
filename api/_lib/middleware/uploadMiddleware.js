@@ -1,18 +1,4 @@
-/**
- * middleware/uploadMiddleware.js
- * -----------------------------------------------------------------------
- * Konfigurasi Multer untuk dua kebutuhan berbeda:
- *   1. excelUpload      — upload file Excel (.xlsx/.xls) di /api/health/upload
- *   2. attachmentUpload — upload lampiran bukti pengaduan (jpg/png/pdf)
- *                         di /api/complaints (opsional)
- *
- * Keduanya memakai memory storage (file tidak pernah ditulis ke disk),
- * karena:
- *   - File Excel hanya dibaca sekali lalu datanya disimpan ke Supabase,
- *     file mentahnya tidak perlu disimpan.
- *   - Lampiran pengaduan langsung dilampirkan ke email lalu dibuang.
- * -----------------------------------------------------------------------
- */
+
 const multer = require("multer");
 const { ApiError } = require("../utils/apiResponse");
 const { hasAllowedExtension } = require("../utils/excelProcessor");
@@ -77,10 +63,7 @@ const documentUpload = multer({
   },
 }).single("file");
 
-/**
- * Bungkus middleware Multer agar error (ukuran/format file) diteruskan
- * secara konsisten ke errorHandler.js, bukan bocor sebagai stack trace.
- */
+
 function wrapMulter(multerMiddleware, maxSizeMb) {
   return function (req, res, next) {
     multerMiddleware(req, res, (err) => {

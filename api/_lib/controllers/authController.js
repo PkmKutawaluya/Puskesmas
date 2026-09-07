@@ -1,9 +1,4 @@
-/**
- * controllers/authController.js
- * -----------------------------------------------------------------------
- * POST /api/auth/login -> login admin, mengembalikan JWT.
- * -----------------------------------------------------------------------
- */
+
 const authService = require("../services/authService");
 const asyncHandler = require("../utils/asyncHandler");
 const { sendSuccess, ApiError } = require("../utils/apiResponse");

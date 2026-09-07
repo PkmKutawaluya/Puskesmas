@@ -1,15 +1,4 @@
-/**
- * routes/healthRoutes.js
- * -----------------------------------------------------------------------
- * POST   /api/health/upload    -> upload & proses file Excel
- * GET    /api/health/visits    -> data grafik tren kunjungan pasien
- * GET    /api/health/diseases  -> data grafik penyakit terbanyak
- * GET    /api/health/summary   -> ringkasan data kesehatan
- * GET    /api/health/sources   -> daftar file yang pernah diunggah (admin)
- * DELETE /api/health/sources   -> hapus data berdasarkan file sumber (admin)
- * GET    /api/health/status    -> cek layanan data kesehatan berjalan
- * -----------------------------------------------------------------------
- */
+
 const express = require("express");
 const {
   uploadHealthData,

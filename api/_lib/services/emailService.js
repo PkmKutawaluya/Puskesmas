@@ -1,11 +1,4 @@
-/**
- * services/emailService.js
- * -----------------------------------------------------------------------
- * Mengirim email pengaduan masyarakat menggunakan Nodemailer.
- * Seluruh konfigurasi SMTP diambil dari environment variable (.env),
- * TIDAK PERNAH ditulis langsung di source code.
- * -----------------------------------------------------------------------
- */
+
 const nodemailer = require("nodemailer");
 const { ApiError } = require("../utils/apiResponse");
 
@@ -26,7 +19,7 @@ function getTransporter() {
   cachedTransporter = nodemailer.createTransport({
     host: MAIL_HOST,
     port: Number(MAIL_PORT) || 587,
-    secure: MAIL_SECURE === "true", // true untuk port 465, false untuk port lain (STARTTLS)
+    secure: MAIL_SECURE === "true", 
     auth: {
       user: MAIL_USER,
       pass: MAIL_PASSWORD,
@@ -45,8 +38,7 @@ function escapeHtml(str) {
 }
 
 /**
- * Kirim email pengaduan masyarakat ke alamat tujuan Puskesmas (MAIL_TO).
- * @param {object} complaint - { nama, email, no_hp, kategori, subjek, isi }
+  * @param {object} complaint - { nama, email, no_hp, kategori, subjek, isi }
  * @param {{buffer: Buffer, originalname: string, mimetype: string}|null} attachment
  */
 async function sendComplaintEmail(complaint, attachment) {

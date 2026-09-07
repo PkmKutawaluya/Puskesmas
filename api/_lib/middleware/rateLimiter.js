@@ -1,13 +1,7 @@
-/**
- * middleware/rateLimiter.js
- * -----------------------------------------------------------------------
- * Pembatasan jumlah request untuk mencegah penyalahgunaan/spam,
- * khususnya pada endpoint yang menulis data (survei, pengaduan, upload).
- * -----------------------------------------------------------------------
- */
+
 const rateLimit = require("express-rate-limit");
 
-/** Limiter umum untuk seluruh API (dipasang secara global). */
+
 const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 menit
   max: 300,
@@ -19,7 +13,7 @@ const generalLimiter = rateLimit({
   },
 });
 
-/** Limiter lebih ketat untuk endpoint yang menulis data / mengirim email. */
+
 const writeLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 20,

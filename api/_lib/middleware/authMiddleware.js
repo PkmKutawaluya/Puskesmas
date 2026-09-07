@@ -1,13 +1,4 @@
-/**
- * middleware/authMiddleware.js
- * -----------------------------------------------------------------------
- * Middleware untuk melindungi endpoint yang hanya boleh diakses admin
- * yang sudah login (contoh: POST /api/health/upload).
- *
- * Mengharapkan header:
- *   Authorization: Bearer <token>
- * -----------------------------------------------------------------------
- */
+
 const authService = require("../services/authService");
 const { ApiError } = require("../utils/apiResponse");
 

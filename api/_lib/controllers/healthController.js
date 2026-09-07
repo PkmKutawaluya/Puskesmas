@@ -1,14 +1,4 @@
-/**
- * controllers/healthController.js
- * -----------------------------------------------------------------------
- * Menangani:
- *   POST /api/health/upload    -> upload & proses file Excel
- *   GET  /api/health/visits    -> data grafik tren kunjungan pasien
- *   GET  /api/health/diseases  -> data grafik penyakit terbanyak
- *   GET  /api/health/summary   -> ringkasan data kesehatan
- *   GET  /api/health/status    -> cek backend berjalan
- * -----------------------------------------------------------------------
- */
+
 const healthService = require("../services/healthService");
 const { processExcelBuffer } = require("../utils/excelProcessor");
 const asyncHandler = require("../utils/asyncHandler");

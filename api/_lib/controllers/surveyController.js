@@ -1,16 +1,4 @@
-/**
- * controllers/surveyController.js
- * -----------------------------------------------------------------------
- * Menangani:
- *   POST /api/survey                -> simpan hasil survei
- *   GET  /api/survey/satisfaction   -> persentase kepuasan masyarakat
- *
- * Field body yang diterima (sesuai payload dari frontend js/pages/survei.js):
- *   nama (opsional), usia (opsional), tanggal_kunjungan (wajib),
- *   layanan (wajib), penilaian (wajib, object {q1..qN: 1-5}),
- *   saran (opsional), hal_disukai (opsional)
- * -----------------------------------------------------------------------
- */
+
 const surveyService = require("../services/surveyService");
 const asyncHandler = require("../utils/asyncHandler");
 const { sendSuccess, ApiError } = require("../utils/apiResponse");

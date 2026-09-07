@@ -1,9 +1,4 @@
-/**
- * routes/statusRoutes.js
- * -----------------------------------------------------------------------
- * GET /api/status -> cek apakah backend berjalan
- * -----------------------------------------------------------------------
- */
+
 const express = require("express");
 const { getStatus } = require("../controllers/statusController");
 

@@ -1,26 +1,14 @@
-/**
- * services/surveyService.js
- * -----------------------------------------------------------------------
- * Logika bisnis untuk survei kepuasan masyarakat:
- *   - menyimpan hasil survei ke Turso (tabel survey_responses)
- *   - menghitung persentase kepuasan dari SELURUH data survei yang masuk
- *
- * Struktur jawaban disimpan sebagai TEXT berisi JSON (`answers`), bukan
- * kolom tetap question_1..question_n — supaya jumlah pertanyaan bisa
- * berubah di masa depan tanpa perlu migrasi skema database
- * (lihat sql/schema.sql).
- * -----------------------------------------------------------------------
- */
+
 const crypto = require("node:crypto");
 const db = require("../config/db");
 const { ApiError } = require("../utils/apiResponse");
 
 const TABLE = "survey_responses";
-const SCALE_MAX = 5; // skala penilaian 1-5 sesuai form survei di frontend
+const SCALE_MAX = 5; 
 
 /**
- * Simpan satu respons survei.
- * @param {object} payload - sudah divalidasi & disanitasi oleh controller
+
+ * @param {object} payload 
  */
 async function saveSurveyResponse(payload) {
   const id = crypto.randomUUID();
@@ -48,17 +36,7 @@ async function saveSurveyResponse(payload) {
   return { id };
 }
 
-/**
- * Hitung persentase kepuasan masyarakat berdasarkan SELURUH jawaban
- * survei yang tersimpan.
- *
- * Rumus (skala 1-5, jumlah pertanyaan per responden bisa berbeda-beda —
- * dihitung otomatis dari jumlah jawaban yang benar-benar terisi):
- *
- *   skor_maksimum = total_jawaban_terisi * SCALE_MAX
- *   skor_aktual   = jumlah seluruh nilai jawaban
- *   persentase    = (skor_aktual / skor_maksimum) * 100
- */
+
 async function calculateSatisfaction() {
   let result;
   try {

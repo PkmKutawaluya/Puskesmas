@@ -1,16 +1,4 @@
-/**
- * controllers/complaintController.js
- * -----------------------------------------------------------------------
- * Menangani POST /api/complaints.
- * Pengaduan TIDAK disimpan ke Supabase — backend memvalidasi lalu
- * meneruskannya sebagai email ke alamat tujuan Puskesmas (MAIL_TO)
- * menggunakan services/emailService.js.
- *
- * Field body yang diterima (sesuai payload dari frontend
- * js/pages/pengaduan.js): nama, email, no_hp, kategori, subjek, isi,
- * dan lampiran opsional (multipart, field "lampiran").
- * -----------------------------------------------------------------------
- */
+
 const emailService = require("../services/emailService");
 const asyncHandler = require("../utils/asyncHandler");
 const { sendSuccess, ApiError } = require("../utils/apiResponse");

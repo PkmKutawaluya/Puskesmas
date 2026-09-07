@@ -1,24 +1,11 @@
-/**
- * utils/excelProcessor.js
- * -----------------------------------------------------------------------
- * Membaca file Excel (.xlsx/.xls) dan mengubahnya menjadi data terstruktur.
- *
- * Jenis data:
- *   - kunjungan_pasien
- *   - penyakit_terbanyak
- *   - lainnya
- * -----------------------------------------------------------------------
- */
+
 
 const ExcelJS = require("exceljs");
 const { ApiError } = require("./apiResponse");
 
 const ALLOWED_EXTENSIONS = [".xlsx"];
 
-/**
- * Normalisasi nama kolom:
- * lowercase, trim, spasi/underscore/dash disamakan.
- */
+
 function normalizeHeader(header) {
   return String(header || "")
     .trim()
@@ -26,9 +13,7 @@ function normalizeHeader(header) {
     .replace(/[\s._-]+/g, "_");
 }
 
-/**
- * Alias nama kolom yang diterima.
- */
+
 const COLUMN_ALIASES = {
   kunjungan_pasien: {
     tanggal: ["tanggal", "date", "tgl", "tanggal_kunjungan"],
@@ -60,9 +45,7 @@ const COLUMN_ALIASES = {
   },
 };
 
-/**
- * Mencari mapping nama kolom Excel.
- */
+
 function resolveColumnMapping(originalHeaders, aliasesConfig) {
   const normalizedToOriginal = {};
 
@@ -89,20 +72,18 @@ function resolveColumnMapping(originalHeaders, aliasesConfig) {
   return { mapping, missing };
 }
 
-/**
- * Mengubah tanggal Excel menjadi yyyy-mm-dd.
- */
+
 function parseExcelDate(value) {
   if (value === null || value === undefined || value === "") {
     return null;
   }
 
-  // Jika sudah Date
+ 
   if (value instanceof Date && !isNaN(value.getTime())) {
     return toIsoDate(value);
   }
 
-  // Jika ExcelJS memberikan object rich date/value
+ 
   if (typeof value === "object") {
     if (value instanceof Date && !isNaN(value.getTime())) {
       return toIsoDate(value);
@@ -121,10 +102,9 @@ function parseExcelDate(value) {
     }
   }
 
-  // Jika angka
+
   if (typeof value === "number" && Number.isFinite(value)) {
-    // Excel serial date.
-    // 25569 = 1970-01-01
+
     const milliseconds =
       Math.round((value - 25569) * 86400 * 1000);
 
@@ -160,7 +140,7 @@ function parseExcelDate(value) {
       return toIsoDate(date);
     }
 
-    // yyyy-mm-dd
+
     match = trimmed.match(
       /^(\d{4})-(\d{1,2})-(\d{1,2})$/
     );
@@ -179,7 +159,7 @@ function parseExcelDate(value) {
       return toIsoDate(date);
     }
 
-    // Fallback JavaScript
+
     const fallback = new Date(trimmed);
 
     if (!isNaN(fallback.getTime())) {
@@ -228,9 +208,7 @@ function parseNonNegativeInt(value) {
   return Math.round(num);
 }
 
-/**
- * Validasi extension file.
- */
+
 function hasAllowedExtension(filename) {
   const lower = String(filename || "").toLowerCase();
 
@@ -239,9 +217,7 @@ function hasAllowedExtension(filename) {
   );
 }
 
-/**
- * Mengambil nilai asli dari cell ExcelJS.
- */
+
 function getCellValue(cell) {
   const value = cell.value;
 
@@ -269,9 +245,7 @@ function getCellValue(cell) {
   return value;
 }
 
-/**
- * Baca buffer Excel menggunakan ExcelJS.
- */
+
 async function readWorkbookRows(buffer) {
   const workbook = new ExcelJS.Workbook();
 
@@ -313,8 +287,7 @@ async function readWorkbookRows(buffer) {
     );
   }
 
-  // Ambil data mulai baris kedua
-  worksheet.eachRow(
+   worksheet.eachRow(
     { includeEmpty: false },
     (row, rowNumber) => {
       if (rowNumber === 1) return;
@@ -352,9 +325,7 @@ async function readWorkbookRows(buffer) {
   return rows;
 }
 
-/**
- * Proses data kunjungan pasien.
- */
+
 function processKunjunganPasien(rows) {
   const originalHeaders = Object.keys(rows[0]);
 
@@ -414,9 +385,7 @@ function processKunjunganPasien(rows) {
   return result;
 }
 
-/**
- * Proses data penyakit terbanyak.
- */
+
 function processPenyakitTerbanyak(rows) {
   const originalHeaders = Object.keys(rows[0]);
 
@@ -476,9 +445,7 @@ function processPenyakitTerbanyak(rows) {
   return result;
 }
 
-/**
- * Untuk jenis lainnya.
- */
+
 function processGeneric(rows) {
   return rows.map((row, index) => {
     const cleaned = {};
@@ -499,13 +466,7 @@ function processGeneric(rows) {
   });
 }
 
-/**
- * Fungsi utama.
- *
- * PERHATIAN:
- * Karena ExcelJS membaca file secara asynchronous,
- * fungsi ini juga harus asynchronous.
- */
+
 async function processExcelBuffer(
   buffer,
   jenisData

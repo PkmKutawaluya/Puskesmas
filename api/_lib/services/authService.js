@@ -1,17 +1,4 @@
-/**
- * services/authService.js
- * -----------------------------------------------------------------------
- * Autentikasi admin sederhana (single-admin, tanpa tabel user di
- * database) — cukup untuk kebutuhan "hanya admin yang boleh input data
- * kesehatan". Kredensial admin disimpan di environment variable:
- *   ADMIN_USERNAME       (teks biasa)
- *   ADMIN_PASSWORD_HASH  (hash bcrypt, dibuat lewat utils/hashPassword.js)
- *
- * Jika kebutuhan berkembang (banyak admin, role berbeda, dsb), ganti
- * implementasi ini dengan tabel `admins` di Supabase tanpa mengubah
- * controller/route yang memanggilnya.
- * -----------------------------------------------------------------------
- */
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { ApiError } = require("../utils/apiResponse");
@@ -27,16 +14,15 @@ function assertAuthConfigured() {
 }
 
 /**
- * Verifikasi username/password admin, kembalikan JWT jika valid.
- * @throws {ApiError} 401 jika username/password salah
+ * 
+ * @throws {ApiError} 
  */
 async function login(username, password) {
   assertAuthConfigured();
 
   const { JWT_SECRET, JWT_EXPIRES_IN, ADMIN_USERNAME, ADMIN_PASSWORD_HASH } = process.env;
 
-  // Bandingkan username dengan waktu-konstan sederhana (hindari kebocoran
-  // info lewat timing yang jelas berbeda antara "user salah" vs "password salah").
+
   const isUsernameValid = username === ADMIN_USERNAME;
   const isPasswordValid = await bcrypt.compare(password, ADMIN_PASSWORD_HASH);
 
@@ -52,8 +38,8 @@ async function login(username, password) {
 }
 
 /**
- * Verifikasi token JWT, kembalikan payload jika valid.
- * @throws {ApiError} 401 jika token tidak ada/tidak valid/kedaluwarsa
+ * 
+ * @throws {ApiError} 
  */
 function verifyToken(token) {
   const { JWT_SECRET } = process.env;
